@@ -20,7 +20,11 @@ export class TodoService {
     return this.todoRepository.find();
   }
 
-  findById(id: number) {
+  findByCreatedAt(createdAt: Date){
+    return this.todoRepository.findByCreatedAt(createdAt);
+  }
+
+  async findById(id: number) {
     return this.todoRepository.findById(id);
   }
 

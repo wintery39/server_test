@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
@@ -34,6 +35,13 @@ export class TodoController {
   findById(@Param('id') id: string) {
     return this.todoService.findById(+id);
   }
+
+  @ApiOperation({ summary: '생성된 시간으로 조회하기'})
+  @Get()
+  findByCreatedAt(@Query('createdAt') createdAt: Date){
+    return this.todoService.findByCreatedAt(createdAt);
+  }
+
 
   @ApiOperation({ summary: '할 일 수정하기' })
   @Patch(':id')

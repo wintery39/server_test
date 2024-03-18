@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 import { Todo } from './entities/todo.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
@@ -13,5 +13,9 @@ export class TodoRepository extends Repository<Todo> {
 
   async findById(id: number): Promise<Todo> {
     return await this.repository.findOne({ where: { id } });
+  }
+
+  async findByCreatedAt(createdAt:Date): Promise<Todo[]>{
+    return await this.repository.find({ where: {createdAt: MoreThan(createdAt) } });
   }
 }
